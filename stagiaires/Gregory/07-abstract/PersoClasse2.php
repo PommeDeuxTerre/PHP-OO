@@ -9,7 +9,7 @@ class PersoClasse2 extends PersoClasse2Abstract {
     if ($number < 0)return -$this->lanceDes($dice, -$number);
 
     $total = 0;
-    for ($i=0;$i++;$i<$number){
+    for ($i=0;$i<$number;$i++){
       $total += rand(1, $dice);
     }
     return $total;
@@ -23,35 +23,33 @@ class PersoClasse2 extends PersoClasse2Abstract {
     return $this;
   }
 
+  private function throwAbilityDices(string $espece, string $caracteristic):int{
+    $dices = self::ESPECE_PERSO[$espece][$caracteristic];
+    return array_sum(
+      array_map(
+        fn(array $dice):int => $this->lanceDes($dice[0], $dice[1]),
+        $dices
+      )
+    );
+  }
+
   protected function initHP(string $espece):self{
-    $dices = self::ESPECE_PERSO[$espece]["hp"];
-    foreach ($dices as $dice){
-      $this->persoHP += $this->lanceDes($dice[0], $dice[1]);
-    }
+    $this->persoHP += $this->throwAbilityDices($espece, "hp");
     return $this;
   }
 
   protected function initAbility(string $espece):self{
-    $dices = self::ESPECE_PERSO[$espece]["ability"];
-    foreach ($dices as $dice){
-      $this->persoAbility += $this->lanceDes($dice[0], $dice[1]);
-    }
+    $this->persoAbility += $this->throwAbilityDices($espece, "ability");
     return $this;
   }
 
   protected function initStrength(string $espece):self{
-    $dices = self::ESPECE_PERSO[$espece]["strength"];
-    foreach ($dices as $dice){
-      $this->persoSrength += $this->lanceDes($dice[0], $dice[1]);
-    }
+    $this->persoSrength += $this->throwAbilityDices($espece, "strength");
     return $this;
   }
 
   protected function initSpeed(string $espece):self{
-    $dices = self::ESPECE_PERSO[$espece]["speed"];
-    foreach ($dices as $dice){
-      $this->persoSpeed += $this->lanceDes($dice[0], $dice[1]);
-    }
+    $this->persoSpeed += $this->throwAbilityDices($espece, "speed");
     return $this;
   }
 }

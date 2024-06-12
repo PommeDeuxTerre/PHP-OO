@@ -22,6 +22,7 @@ require_once "PersoClasse2.php";
 // impossible d'instancier la classe abstraite:
 $perso1 = new PersoClasse2("pomme", "Humain");
 var_dump($perso1);
+$perso1->initPerso("Humain");
 
 ?>
 </body>
