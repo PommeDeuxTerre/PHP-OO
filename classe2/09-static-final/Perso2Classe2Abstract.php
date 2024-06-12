@@ -1,6 +1,6 @@
 <?php
 
-abstract class PersoClasse2Abstract
+abstract class Perso2Classe2Abstract
 {
 
     /*
@@ -111,7 +111,6 @@ abstract class PersoClasse2Abstract
     abstract protected function initAbility(string $espece);
     abstract protected function initStrength(string $espece);
     abstract protected function initSpeed(string $espece);
-    // abstract protected function lulu();
 
 
     // GETTERS et SETTERS hérités
